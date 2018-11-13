@@ -1,7 +1,7 @@
 package Lesson5;
 
 /**
- * Java2. Lesson 4. Homework
+ * Java2. Lesson 5. Homework
  *
  * @author Egor Patrashkin
  * @version dated Nov 13, 2018
