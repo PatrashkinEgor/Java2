@@ -7,6 +7,8 @@ package Lesson5;
  * @version dated Nov 13, 2018
  */
 
+import java.util.Arrays;
+
 /**
  * Задание:
  * 1. Необходимо написать два метода, которые делают следующее:
@@ -34,14 +36,13 @@ public class Java2Lesson5HW {
     private static final int  QUARTER_SIZE = SIZE /4;//Длина подмассивов при делении на четыре потока
 
     public static void main(String[] args) {
-        singleThreadMethod();
-        doubleThreadMethod();
+        System.out.println(Arrays.equals(singleThreadMethod(), doubleThreadMethod()));
         threeThreadMethod();
         fourThreadMethod();
     }
 
 
-    public static void singleThreadMethod(){
+    public static float[] singleThreadMethod(){
         float[] arr = new float[SIZE];
 
         for (int i = 0; i < arr.length; i++) {  //Заполняем массив единицами
@@ -60,10 +61,11 @@ public class Java2Lesson5HW {
         } while (mt1.thrd.isAlive());                                   //Ждем пока поток не завершится
 
         System.out.println("Single thread method was performed in " + (System.currentTimeMillis() - startTime) + " ms");
+        return arr;
     }
 
 
-    public static void doubleThreadMethod(){
+    public static float[] doubleThreadMethod(){
 
         float[] arr = new float[SIZE];
 
@@ -93,10 +95,11 @@ public class Java2Lesson5HW {
         System.arraycopy(secondHalfOfArr, 0, arr, HALF_SIZE, HALF_SIZE);
 
         System.out.println("Double thread method was performed in " + (System.currentTimeMillis() - startTime) + " ms");
+        return arr;
     }
 
 
-    public static void threeThreadMethod(){ //Дополнительный метод выполняющий задачу с разбиением на три потока,
+    public static float[] threeThreadMethod(){ //Дополнительный метод выполняющий задачу с разбиением на три потока,
         // выполнено аналогично методу doubleThreadMethod().
 
         float[] arr = new float[SIZE];
@@ -131,9 +134,10 @@ public class Java2Lesson5HW {
         System.arraycopy(thirdPartOfArr, 0, arr, THIRD_SIZE*2, THIRD_SIZE+1);
 
         System.out.println("The three-thread method was performed in " + (System.currentTimeMillis() - startTime) + " ms");
+        return arr;
     }
 
-    public static void fourThreadMethod(){//Дополнительный метод выполняющий задачу с разбиением на четыре потока,
+    public static float[] fourThreadMethod(){//Дополнительный метод выполняющий задачу с разбиением на четыре потока,
         // выполнено аналогично методу doubleThreadMethod().
         float[] arr = new float[SIZE];
         for (int i = 0; i < arr.length; i++) {
@@ -170,6 +174,7 @@ public class Java2Lesson5HW {
         System.arraycopy(fourthPartOfArr, 0, arr, QUARTER_SIZE*3, QUARTER_SIZE);
 
         System.out.println("The four-thread method was performed in " + (System.currentTimeMillis() - startTime) + " ms");
+        return arr;
     }
 
 
@@ -180,7 +185,7 @@ public class Java2Lesson5HW {
      */
     public static float[] calc(float[] arr) {
         for (int i = 0; i < arr.length; i++)
-            arr[i] = (float) (arr[i] * Math.sin(0.2f + arr[i] / 5) * Math.cos(0.2f + arr[i] / 5) * Math.cos(0.4f + arr[i] / 2));
+            arr[i] = (float) (arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         return arr;
     }
 }
